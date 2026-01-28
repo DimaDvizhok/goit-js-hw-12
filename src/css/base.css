@@ -160,6 +160,7 @@ button:hover {
   height: 48px;
   display: flex;
   justify-content: space-evenly;
+  background-color: #d9d7d7;
 }
 
 .image-info-block-part {
