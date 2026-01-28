@@ -26,32 +26,32 @@ export const createGallery = images => {
         downloads,
       }) =>
         `<li class="gallery-item">
-  <a class="gallery-link" href="${largeImageURL}">
-    <img
-      class="gallery-image"
-      src="${webformatURL}"
-      alt="${tags}"
-    />
-  </a>
-  <div class = "image-info-block">
-    <div class = "image-info-block-part">
-      <p class="bold">Likes</p>
-      <p>${likes}</p>
-  </div>
-    <div class = "image-info-block-part">
-    <p class="bold">Views</p>
-    <p>${views}</p>
-  </div>
-  <div class = "image-info-block-part">
-    <p class="bold">Comments</p>
-    <p>${comments}</p>
-  </div>
-  <div class = "image-info-block-part">
-    <p class="bold">Downloads</p>
-    <p>${downloads}</p>
-  </div>
-</div>
-</li>`
+          <a class="gallery-link" href="${largeImageURL}">
+            <img
+              class="gallery-image"
+              src="${webformatURL}"
+              alt="${tags}"
+            />
+          </a>
+          <div class = "image-info-block">
+            <div class = "image-info-block-part">
+                <p class="bold">Likes</p>
+                <p>${likes}</p>
+            </div>
+            <div class = "image-info-block-part">
+                <p class="bold">Views</p>
+                <p>${views}</p>
+            </div>
+            <div class = "image-info-block-part">
+                <p class="bold">Comments</p>
+                <p>${comments}</p>
+            </div>
+            <div class = "image-info-block-part">
+                <p class="bold">Downloads</p>
+                <p>${downloads}</p>
+            </div>
+          </div>
+        </li>`
     )
     .join('');
 

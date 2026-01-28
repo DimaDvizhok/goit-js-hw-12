@@ -1,6 +1,6 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import { getImagesByQuery } from './js/pixabay-api';
+import { getImagesByQuery, PER_PAGE } from './js/pixabay-api';
 import {
   createGallery,
   clearGallery,
@@ -38,7 +38,6 @@ const onFormElemSubmit = async event => {
   try {
     const data = await getImagesByQuery(query, page);
     totalHits = data.totalHits;
-    console.log(totalHits);
 
     if (data.hits.length === 0) {
       iziToast.error({
@@ -51,7 +50,7 @@ const onFormElemSubmit = async event => {
       return;
     }
     createGallery(data.hits);
-    if (totalHits > 15) {
+    if (totalHits > PER_PAGE) {
       showLoadMoreButton();
     }
   } catch (error) {
@@ -72,9 +71,27 @@ const handleLoadMoreClick = async () => {
   showLoader();
   page += 1;
   try {
-    const imageMore = await getImagesByQuery(query, page);
-    createGallery(imageMore.hits);
-    if (totalHits > 15) {
+    const { hits } = await getImagesByQuery(query, page);
+    createGallery(hits);
+
+    const galleryItemElem = document.querySelector('.gallery-item');
+    if (galleryItemElem) {
+      const { height } = galleryItemElem.getBoundingClientRect();
+      window.scrollBy({
+        top: height * 2,
+        behavior: 'smooth',
+      });
+    }
+
+    const totalPages = Math.ceil(totalHits / PER_PAGE);
+    if (page >= totalPages) {
+      hideLoadMoreButton();
+      iziToast.info({
+        message: "We're sorry, but you've reached the end of search results.",
+        position: 'bottomRight',
+        timeout: 3000,
+      });
+    } else {
       showLoadMoreButton();
     }
   } catch (error) {
